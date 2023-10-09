@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/verbTrainer/static/css/main.e2abdc84.css",
+    "main.js": "/verbTrainer/static/js/main.f30450e2.js",
+    "static/js/787.a06dec8a.chunk.js": "/verbTrainer/static/js/787.a06dec8a.chunk.js",
+    "index.html": "/verbTrainer/index.html",
+    "main.e2abdc84.css.map": "/verbTrainer/static/css/main.e2abdc84.css.map",
+    "main.f30450e2.js.map": "/verbTrainer/static/js/main.f30450e2.js.map",
+    "787.a06dec8a.chunk.js.map": "/verbTrainer/static/js/787.a06dec8a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e2abdc84.css",
+    "static/js/main.f30450e2.js"
+  ]
+}
