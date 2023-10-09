@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Typography, Button } from "antd";
+import { FooterButtons } from "../FooterButtons/FooterButtons";
 import "./RegularVerbs.css";
 
 const { Title } = Typography;
@@ -40,20 +41,12 @@ export const RegularVerbs = () => {
           >
             Unreg
           </Button>
-          <div>
-            {selectedOption === word.isRegular && (
-              <Link to="/presentSingle" state={state}>
-                <Button size="large" type="primary">
-                  Дальше
-                </Button>
-              </Link>
-            )}
-            <Link to="/presentSingle" state={state}>
-              <Button size="small" danger>
-                Дальше (правильного ответа не существует)
-              </Button>
-            </Link>
-          </div>
+
+          <FooterButtons
+            link="/presentSingle"
+            state={state}
+            showButtonCondition={selectedOption === word.isRegular}
+          />
         </>
       ) : (
         <div style={{ color: "#fff" }}>Такого слова нет в базе</div>

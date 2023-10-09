@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Button, Radio, Space } from "antd";
-import { Link, useLocation } from "react-router-dom";
+import { Radio, Space } from "antd";
+import { useLocation } from "react-router-dom";
+import { FooterButtons } from "../FooterButtons/FooterButtons";
 
 export const SelectWords = () => {
   const [value, setValue] = useState("");
@@ -20,20 +21,11 @@ export const SelectWords = () => {
         </Space>
       </Radio.Group>
 
-      <div>
-        {value && (
-          <Link to="/regelmassigWahl" state={{ data: state, value }}>
-            <Button size="large" type="primary">
-              Дальше
-            </Button>
-          </Link>
-        )}
-        <Link to="/regelmassigWahl" state={{ data: state, value }}>
-          <Button size="small" danger>
-            Дальше (правильного ответа не существует)
-          </Button>
-        </Link>
-      </div>
+      <FooterButtons
+        link="/regelmassigWahl"
+        state={{ data: state, value }}
+        showButtonCondition={value}
+      />
     </div>
   );
 };

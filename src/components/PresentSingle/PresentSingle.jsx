@@ -1,8 +1,10 @@
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
-import { Typography, Button, List, Radio, Divider } from "antd";
+import { useLocation } from "react-router-dom";
+import { Typography, Radio, Divider } from "antd";
+import { FooterButtons } from "../FooterButtons/FooterButtons";
 
 import answers from "../../answers.json";
+
 const { Title, Text } = Typography;
 
 export const PresentSingle = () => {
@@ -64,20 +66,8 @@ export const PresentSingle = () => {
           ))}
         </Radio.Group>
       </div>
-      <div>
-        {/* {selectedOption === word.isRegular && ( */}
-        <Link to="/presentSingle" state={state}>
-          <Button size="large" type="primary">
-            Дальше
-          </Button>
-        </Link>
-        {/* )} */}
-        <Link to="/presentSingle" state={state}>
-          <Button size="small" danger>
-            Дальше (правильного ответа не существует)
-          </Button>
-        </Link>
-      </div>
+
+      <FooterButtons state={state} showButtonCondition={true} />
     </div>
   );
 };

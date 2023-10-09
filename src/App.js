@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "antd";
+import { FooterButtons } from "./components/FooterButtons/FooterButtons";
 import "./App.css";
 
 function App() {
@@ -26,14 +25,12 @@ function App() {
       <div>
         <input type="file" onChange={handleUpload} className="uploadInput" />
       </div>
-      <Link to="/select" state={fileData}>
-        <Button size="large">Дальше</Button>
-      </Link>
-      <Link to="/select" state={fileData}>
-        <Button size="small" danger>
-          Дальше (правильного ответа не существует)
-        </Button>
-      </Link>
+
+      <FooterButtons
+        link="/select"
+        state={fileData}
+        showButtonCondition={fileData}
+      />
     </div>
   );
 }

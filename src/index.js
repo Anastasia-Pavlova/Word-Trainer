@@ -52,7 +52,7 @@ root.render(
         algorithm: theme.darkAlgorithm,
       }}
     >
-      <Layout>
+      <Layout style={{ height: "100vh" }}>
         <RouterProvider router={router} />
       </Layout>
     </ConfigProvider>
