@@ -1,0 +1,342 @@
+[
+  {
+    "word": "haben",
+    "root": "hab",
+    "translation": "иметь",
+    "isRegular": false,
+    "single": {
+      "1": {
+        "ending": ["e"],
+        "vowel": "="
+      },
+      "2": {
+        "ending": ["st", "÷"],
+        "vowel": "="
+      },
+      "3": {
+        "ending": ["t", "÷"],
+        "vowel": "="
+      }
+    },
+    "plural": {
+      "4": {
+        "ending": ["en"],
+        "vowel": "="
+      },
+      "5": {
+        "ending": ["t"],
+        "vowel": "="
+      },
+      "6": {
+        "ending": ["en"],
+        "vowel": "="
+      }
+    }
+  },
+  {
+    "word": "denken",
+    "root": "denk",
+    "translation": "думать",
+    "isRegular": false,
+    "single": {
+      "1": {
+        "ending": ["e"],
+        "vowel": "="
+      },
+      "2": {
+        "ending": ["st"],
+        "vowel": "="
+      },
+      "3": {
+        "ending": ["t"],
+        "vowel": "="
+      }
+    },
+    "plural": {
+      "4": {
+        "ending": ["en"],
+        "vowel": "="
+      },
+      "5": {
+        "ending": ["t"],
+        "vowel": "="
+      },
+      "6": {
+        "ending": ["en"],
+        "vowel": "="
+      }
+    }
+  },
+  {
+    "word": "durfen",
+    "root": "durf",
+    "translation": "иметь дозволение",
+    "isRegular": false,
+    "single": {
+      "1": {
+        "ending": ["-"],
+        "vowel": "a"
+      },
+      "2": {
+        "ending": ["st"],
+        "vowel": "a"
+      },
+      "3": {
+        "ending": ["-"],
+        "vowel": "a"
+      }
+    },
+    "plural": {
+      "4": {
+        "ending": ["en"],
+        "vowel": "="
+      },
+      "5": {
+        "ending": ["t"],
+        "vowel": "="
+      },
+      "6": {
+        "ending": ["en"],
+        "vowel": "="
+      }
+    }
+  },
+  {
+    "word": "spielen",
+    "root": "spiel",
+    "translation": "играть",
+    "isRegular": true,
+    "single": {
+      "1": {
+        "ending": ["e"],
+        "vowel": "="
+      },
+      "2": {
+        "ending": ["st"],
+        "vowel": "="
+      },
+      "3": {
+        "ending": ["t"],
+        "vowel": "="
+      }
+    },
+    "plural": {
+      "4": {
+        "ending": ["en"],
+        "vowel": "="
+      },
+      "5": {
+        "ending": ["t"],
+        "vowel": "="
+      },
+      "6": {
+        "ending": ["en"],
+        "vowel": "="
+      }
+    }
+  },
+  {
+    "word": "tun",
+    "root": "tun",
+    "translation": "делать",
+    "isRegular": false,
+    "single": {
+      "1": {
+        "ending": ["÷", "e"],
+        "vowel": "="
+      },
+      "2": {
+        "ending": ["÷", "st"],
+        "vowel": "="
+      },
+      "3": {
+        "ending": ["÷", "-"],
+        "vowel": "="
+      }
+    },
+    "plural": {
+      "4": {
+        "ending": ["-"],
+        "vowel": "="
+      },
+      "5": {
+        "ending": ["÷", "t"],
+        "vowel": "="
+      },
+      "6": {
+        "ending": ["-"],
+        "vowel": "="
+      }
+    }
+  },
+  {
+    "word": "dauern",
+    "root": "dauer",
+    "translation": "длиться",
+    "isRegular": true,
+    "single": {
+      "1": {
+        "ending": ["e"],
+        "vowel": "="
+      },
+      "2": {
+        "ending": ["st"],
+        "vowel": "="
+      },
+      "3": {
+        "ending": ["t"],
+        "vowel": "="
+      }
+    },
+    "plural": {
+      "4": {
+        "ending": ["="],
+        "vowel": "="
+      },
+      "5": {
+        "ending": ["t"],
+        "vowel": "="
+      },
+      "6": {
+        "ending": ["="],
+        "vowel": "="
+      }
+    }
+  },
+  {
+    "word": "bleiben",
+    "root": "bleib",
+    "translation": "оставаться",
+    "isRegular": false,
+    "single": {
+      "1": {
+        "ending": ["e"],
+        "vowel": "="
+      },
+      "2": {
+        "ending": ["st"],
+        "vowel": "="
+      },
+      "3": {
+        "ending": ["t"],
+        "vowel": "="
+      }
+    },
+    "plural": {
+      "4": {
+        "ending": ["en"],
+        "vowel": "="
+      },
+      "5": {
+        "ending": ["t"],
+        "vowel": "="
+      },
+      "6": {
+        "ending": ["en"],
+        "vowel": "="
+      }
+    }
+  },
+  {
+    "word": "finden",
+    "root": "find",
+    "translation": "находить",
+    "isRegular": false,
+    "single": {
+      "1": {
+        "ending": ["e"],
+        "vowel": "="
+      },
+      "2": {
+        "ending": ["st"],
+        "vowel": "="
+      },
+      "3": {
+        "ending": ["t"],
+        "vowel": "="
+      }
+    },
+    "plural": {
+      "4": {
+        "ending": ["en"],
+        "vowel": "="
+      },
+      "5": {
+        "ending": ["t"],
+        "vowel": "="
+      },
+      "6": {
+        "ending": ["en"],
+        "vowel": "="
+      }
+    }
+  },
+  {
+    "word": "verbringen",
+    "root": "verbring",
+    "translation": "проводить",
+    "isRegular": false,
+    "single": {
+      "1": {
+        "ending": ["e"],
+        "vowel": "="
+      },
+      "2": {
+        "ending": ["st"],
+        "vowel": "="
+      },
+      "3": {
+        "ending": ["t"],
+        "vowel": "="
+      }
+    },
+    "plural": {
+      "4": {
+        "ending": ["en"],
+        "vowel": "="
+      },
+      "5": {
+        "ending": ["t"],
+        "vowel": "="
+      },
+      "6": {
+        "ending": ["en"],
+        "vowel": "="
+      }
+    }
+  },
+  {
+    "word": "besitzen",
+    "root": "besitz",
+    "translation": "владеть",
+    "isRegular": false,
+    "single": {
+      "1": {
+        "ending": ["e"],
+        "vowel": "="
+      },
+      "2": {
+        "ending": ["t"],
+        "vowel": "="
+      },
+      "3": {
+        "ending": ["t"],
+        "vowel": "="
+      }
+    },
+    "plural": {
+      "4": {
+        "ending": ["en"],
+        "vowel": "="
+      },
+      "5": {
+        "ending": ["t"],
+        "vowel": "="
+      },
+      "6": {
+        "ending": ["en"],
+        "vowel": "="
+      }
+    }
+  }
+]
