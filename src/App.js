@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { Button, Typography } from "antd";
 import { FooterButtons } from "./components/FooterButtons/FooterButtons";
+import data from "./WordsArray.json";
 import "./App.css";
+
+const { Text } = Typography;
 
 function App() {
   const [fileData, setFileData] = useState();
@@ -20,10 +24,18 @@ function App() {
     reader.readAsText(file);
   }
 
+  function handleUseSampleFile() {
+    setFileData(data);
+  }
+
   return (
     <div style={{ textAlign: "center", margin: 50 }}>
       <div>
         <input type="file" onChange={handleUpload} className="uploadInput" />
+      </div>
+      <Text>or</Text>
+      <div>
+        <Button onClick={handleUseSampleFile}>Use sample file</Button>
       </div>
 
       <FooterButtons

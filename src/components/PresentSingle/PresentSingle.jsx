@@ -1,9 +1,8 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { Typography, Radio, Divider } from "antd";
+import { Typography, Divider } from "antd";
 import { FooterButtons } from "../FooterButtons/FooterButtons";
-
-import answers from "../../answers.json";
+import { SelectionBlock } from "./SelectionBlock/SelectionBlock";
 
 const { Title, Text } = Typography;
 
@@ -17,55 +16,38 @@ export const PresentSingle = () => {
       <Title level={3}>Presence</Title>
       <Title level={5}>{word.root}</Title>
 
-      <div>
-        <Text>Первая форма</Text>
-        <br />
-        <Radio.Group onChange={() => {}}>
-          {answers.vocabels.map((v) => (
-            <Radio.Button value={v}>{v}</Radio.Button>
-          ))}
-        </Radio.Group>
-        <br />
-        <Radio.Group onChange={() => {}}>
-          {answers.endings.map((v) => (
-            <Radio.Button value={v}>{v}</Radio.Button>
-          ))}
-        </Radio.Group>
-      </div>
-
-      <Divider />
-      <div>
-        <Text>Вторая форма</Text>
-        <br />
-        <Radio.Group onChange={() => {}}>
-          {answers.vocabels.map((v) => (
-            <Radio.Button value={v}>{v}</Radio.Button>
-          ))}
-        </Radio.Group>
-        <br />
-        <Radio.Group onChange={() => {}}>
-          {answers.endings.map((v) => (
-            <Radio.Button value={v}>{v}</Radio.Button>
-          ))}
-        </Radio.Group>
-      </div>
-
-      <Divider />
-      <div>
-        <Text>Третья форма</Text>
-        <br />
-        <Radio.Group onChange={() => {}}>
-          {answers.vocabels.map((v) => (
-            <Radio.Button value={v}>{v}</Radio.Button>
-          ))}
-        </Radio.Group>
-        <br />
-        <Radio.Group onChange={() => {}}>
-          {answers.endings.map((v) => (
-            <Radio.Button value={v}>{v}</Radio.Button>
-          ))}
-        </Radio.Group>
-      </div>
+      {Array(3)
+        .fill(Math.random)
+        .map((_v, i) => {
+          const name =
+            i === 0
+              ? "Первая форма"
+              : i === 1
+              ? "Вторая форма"
+              : "Третья форма";
+          return (
+            <React.Fragment key={i}>
+              <div>
+                <Text>{name}</Text>
+                <br />
+                <SelectionBlock
+                  word={word}
+                  quantity={"single"}
+                  person={i + 1}
+                  wordPart={"ending"}
+                />
+                <br />
+                <SelectionBlock
+                  word={word}
+                  quantity={"single"}
+                  person={i + 1}
+                  wordPart={"vowel"}
+                />
+              </div>
+              <Divider />
+            </React.Fragment>
+          );
+        })}
 
       <FooterButtons state={state} showButtonCondition={true} />
     </div>
