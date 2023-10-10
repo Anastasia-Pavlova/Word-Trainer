@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
 import { Typography, Button } from "antd";
 import { FooterButtons } from "../FooterButtons/FooterButtons";
+import { useSelector } from "react-redux";
 import "./RegularVerbs.css";
 
 const { Title } = Typography;
 
 export const RegularVerbs = () => {
-  const { state } = useLocation();
+  const { list, currentWord } = useSelector((state) => state.words);
   const [selectedOption, setSelectedOption] = useState("");
 
-  const word = state.data.find((word) => word.word === state.value);
+  const word = list.find((word) => word.word === currentWord);
 
   function handleSelectAnswer(isRegular) {
     setSelectedOption(isRegular);
@@ -44,7 +44,6 @@ export const RegularVerbs = () => {
 
           <FooterButtons
             link="/presentSingle"
-            state={state}
             showButtonCondition={selectedOption === word.isRegular}
           />
         </>

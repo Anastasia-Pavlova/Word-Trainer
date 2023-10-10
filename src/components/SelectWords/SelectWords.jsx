@@ -1,31 +1,32 @@
 import React, { useState } from "react";
 import { Radio, Space } from "antd";
-import { useLocation } from "react-router-dom";
 import { FooterButtons } from "../FooterButtons/FooterButtons";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentWord } from "../../redux/reducers/wordsSlice";
 
 export const SelectWords = () => {
+  const dispatch = useDispatch();
   const [value, setValue] = useState("");
-  const { state } = useLocation();
+  const words = useSelector((state) => state.words.list);
 
   function handleChangeValue(e) {
     setValue(e.target.value);
+    dispatch(setCurrentWord(e.target.value));
   }
 
   return (
     <div style={{ textAlign: "center", margin: 50 }}>
       <Radio.Group value={value} onChange={handleChangeValue}>
         <Space direction="vertical">
-          {state.map((word) => (
-            <Radio value={word.word}>{word.word}</Radio>
+          {words.map((word) => (
+            <Radio disabled={word.isUsed} value={word.word}>
+              {word.word}
+            </Radio>
           ))}
         </Space>
       </Radio.Group>
 
-      <FooterButtons
-        link="/regelmassigWahl"
-        state={{ data: state, value }}
-        showButtonCondition={value}
-      />
+      <FooterButtons link="/regelmassigWahl" showButtonCondition={value} />
     </div>
   );
 };

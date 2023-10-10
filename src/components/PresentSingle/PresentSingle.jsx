@@ -1,15 +1,18 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
-import { Typography, Divider } from "antd";
+import { Typography, Divider, Button } from "antd";
 import { FooterButtons } from "../FooterButtons/FooterButtons";
 import { SelectionBlock } from "./SelectionBlock/SelectionBlock";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentWordCompleted } from "../../redux/reducers/wordsSlice";
+import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
 export const PresentSingle = () => {
-  const { state } = useLocation();
-
-  const word = state.data.find((word) => word.word === state.value);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { list, currentWord } = useSelector((state) => state.words);
+  const word = list.find((word) => word.word === currentWord);
 
   return (
     <div style={{ textAlign: "center", margin: 50 }}>
@@ -49,7 +52,16 @@ export const PresentSingle = () => {
           );
         })}
 
-      <FooterButtons state={state} showButtonCondition={true} />
+      <Button
+        onClick={() => {
+          dispatch(setCurrentWordCompleted());
+          navigate("/select");
+        }}
+      >
+        Complete
+      </Button>
+
+      <FooterButtons showButtonCondition={true} />
     </div>
   );
 };

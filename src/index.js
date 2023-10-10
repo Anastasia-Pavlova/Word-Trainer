@@ -8,6 +8,8 @@ import { SelectWords } from "./components/SelectWords";
 import { RegularVerbs } from "./components/RegularVerbs";
 import { ConfigProvider, Layout, theme } from "antd";
 import { PresentSingle } from "./components/PresentSingle/PresentSingle";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -52,9 +54,11 @@ root.render(
         algorithm: theme.darkAlgorithm,
       }}
     >
-      <Layout style={{ height: "100vh" }}>
-        <RouterProvider router={router} />
-      </Layout>
+      <Provider store={store}>
+        <Layout style={{ height: "100vh" }}>
+          <RouterProvider router={router} />
+        </Layout>
+      </Provider>
     </ConfigProvider>
   </React.StrictMode>
 );
