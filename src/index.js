@@ -10,6 +10,7 @@ import { ConfigProvider, Layout, theme } from "antd";
 import { PresentSingle } from "./components/PresentSingle/PresentSingle";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { PresentPlural } from "./components/PresentPlural/PresentPlural";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -31,20 +32,8 @@ const router = createBrowserRouter([
     element: <PresentSingle />,
   },
   {
-    path: "/ver21",
-    element: "2",
-  },
-  {
-    path: "/verb3",
-    element: "3",
-  },
-  {
-    path: "/verb4",
-    element: "4",
-  },
-  {
-    path: "/verb5",
-    element: "5",
+    path: "/presentPlural",
+    element: <PresentPlural />,
   },
 ]);
 root.render(

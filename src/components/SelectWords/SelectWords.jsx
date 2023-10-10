@@ -19,7 +19,7 @@ export const SelectWords = () => {
       <Radio.Group value={value} onChange={handleChangeValue}>
         <Space direction="vertical">
           {words.map((word) => (
-            <Radio disabled={word.isUsed} value={word.word}>
+            <Radio key={word.word} disabled={word.isUsed} value={word.word}>
               {word.word}
             </Radio>
           ))}

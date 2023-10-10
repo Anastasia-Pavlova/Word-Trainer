@@ -1,24 +1,25 @@
 import React, { useState } from "react";
 import { Typography, Divider, Button } from "antd";
 import { FooterButtons } from "../FooterButtons/FooterButtons";
-import { SelectionBlock } from "../SelectionBlock/SelectionBlock";
+import { SelectionBlock } from "../SelectionBlock";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentWordCompleted } from "../../redux/reducers/wordsSlice";
 import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
-export const PresentSingle = () => {
+export const PresentPlural = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { list, currentWord } = useSelector((state) => state.words);
   const [completed, setCompleted] = useState([]);
   const word = list.find((word) => word.word === currentWord);
-  const isCompleted = completed.length === 6;
 
   function handleCompleteBlock(index) {
     setCompleted((prev) => [...prev.filter((v) => v !== index), index]);
   }
+
+  const isCompleted = completed.length === 6;
 
   return (
     <div style={{ textAlign: "center", margin: 50 }}>
@@ -27,7 +28,11 @@ export const PresentSingle = () => {
 
       {Array.from(Array(3).keys()).map((v, i) => {
         const name =
-          i === 0 ? "Первая форма" : i === 1 ? "Вторая форма" : "Третья форма";
+          i === 0
+            ? "Четвертая форма"
+            : i === 1
+            ? "Пятая форма"
+            : "Шестая форма";
         return (
           <React.Fragment key={v}>
             <div>
@@ -36,8 +41,8 @@ export const PresentSingle = () => {
               <SelectionBlock
                 index={`${v}ending`}
                 word={word}
-                quantity={"single"}
-                person={i + 1}
+                quantity={"plural"}
+                person={i + 4}
                 wordPart={"ending"}
                 handleComplete={handleCompleteBlock}
               />
@@ -45,8 +50,8 @@ export const PresentSingle = () => {
               <SelectionBlock
                 index={`${v}vowel`}
                 word={word}
-                quantity={"single"}
-                person={i + 1}
+                quantity={"plural"}
+                person={i + 4}
                 wordPart={"vowel"}
                 handleComplete={handleCompleteBlock}
               />
@@ -65,7 +70,7 @@ export const PresentSingle = () => {
         Complete
       </Button>
 
-      <FooterButtons showButtonCondition={isCompleted} link="/presentPlural" />
+      <FooterButtons showButtonCondition={isCompleted} />
     </div>
   );
 };

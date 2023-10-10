@@ -1,11 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "antd";
 
-import answers from "../../../answers.json";
+import answers from "../../answers.json";
 
-export const SelectionBlock = ({ word, quantity, person, wordPart }) => {
+export const SelectionBlock = ({
+  index,
+  word,
+  quantity,
+  person,
+  wordPart,
+  handleComplete,
+}) => {
   const [selectedValue, setSelectedValue] = useState();
   const [correctValues, setCorrectValues] = useState([]);
+
+  useEffect(() => {
+    if (
+      (correctValues.length && wordPart === "vowel") ||
+      correctValues.length === word[quantity][person][wordPart].length
+    ) {
+      console.log("complete");
+      handleComplete(index);
+    }
+  }, [correctValues.length]);
 
   const isCorrect =
     wordPart === "ending"
