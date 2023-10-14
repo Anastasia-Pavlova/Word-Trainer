@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Divider, Button } from "antd";
-import { FooterButtons } from "../FooterButtons/FooterButtons";
 import { SelectionBlock } from "../SelectionBlock";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentWordCompleted } from "../../redux/reducers/wordsSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { completeStep } from "../../redux/reducers/stepsSlice";
 
 const { Title, Text } = Typography;
 
@@ -20,6 +20,18 @@ export const PresentPlural = () => {
   }
 
   const isCompleted = completed.length === 6;
+
+  useEffect(() => {
+    isCompleted && dispatch(completeStep(true));
+  }, [completed]);
+
+  if (!word) {
+    return (
+      <Title level={3}>
+        The memory is empty. Please, go to the <Link to="/">main page</Link>.
+      </Title>
+    );
+  }
 
   return (
     <div style={{ textAlign: "center", margin: 50 }}>
@@ -69,8 +81,6 @@ export const PresentPlural = () => {
       >
         Complete
       </Button>
-
-      <FooterButtons showButtonCondition={isCompleted} />
     </div>
   );
 };

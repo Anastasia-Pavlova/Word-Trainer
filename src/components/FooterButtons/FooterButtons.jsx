@@ -1,28 +1,50 @@
 import React from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Button } from "antd";
+import { Button, Space } from "antd";
+import { useDispatch } from "react-redux";
+import { completeStep } from "../../redux/reducers/stepsSlice";
 
-export const FooterButtons = ({ link, showButtonCondition }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
+export const FooterButtons = ({
+  current,
+  showButtonCondition,
+  onChangeStep,
+}) => {
+  const dispatch = useDispatch();
+
+  function handleChangeStep(value) {
+    onChangeStep(value);
+    dispatch(completeStep(false));
+  }
 
   return (
-    <div>
-      {location.pathname !== "/" && (
-        <Button onClick={() => navigate(-1)}>Back</Button>
-      )}
-      {showButtonCondition && (
-        <Link to={link}>
-          <Button size="large" type="primary">
+    <div
+      style={{
+        position: "absolute",
+        bottom: 50,
+        left: "50%",
+        transform: "translateX(-50%)",
+      }}
+    >
+      <Space>
+        {current > 0 && (
+          <Button size="large" onClick={() => handleChangeStep(-1)}>
+            Back
+          </Button>
+        )}
+        {showButtonCondition && (
+          <Button
+            size="large"
+            type="primary"
+            onClick={() => handleChangeStep(1)}
+          >
             Дальше
           </Button>
-        </Link>
-      )}
-      <Link to={link}>
-        <Button size="small" danger>
-          Дальше (правильного ответа не существует)
+        )}
+        <Button size="small" danger onClick={() => handleChangeStep(1)}>
+          Дальше
+          <br />
+          (правильного ответа не существует)
         </Button>
-      </Link>
+      </Space>
     </div>
   );
 };

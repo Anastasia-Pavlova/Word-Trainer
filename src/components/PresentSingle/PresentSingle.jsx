@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography, Divider, Button } from "antd";
-import { FooterButtons } from "../FooterButtons/FooterButtons";
-import { SelectionBlock } from "../SelectionBlock/SelectionBlock";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentWordCompleted } from "../../redux/reducers/wordsSlice";
-import { useNavigate } from "react-router-dom";
+import { completeStep } from "../../redux/reducers/stepsSlice";
+import { SelectionBlock } from "../SelectionBlock";
 
 const { Title, Text } = Typography;
 
@@ -13,11 +13,24 @@ export const PresentSingle = () => {
   const navigate = useNavigate();
   const { list, currentWord } = useSelector((state) => state.words);
   const [completed, setCompleted] = useState([]);
+
   const word = list.find((word) => word.word === currentWord);
   const isCompleted = completed.length === 6;
 
+  useEffect(() => {
+    isCompleted && dispatch(completeStep(true));
+  }, [completed]);
+
   function handleCompleteBlock(index) {
     setCompleted((prev) => [...prev.filter((v) => v !== index), index]);
+  }
+
+  if (!word) {
+    return (
+      <Title level={3}>
+        The memory is empty. Please, go to the <Link to="/">main page</Link>.
+      </Title>
+    );
   }
 
   return (
@@ -55,17 +68,6 @@ export const PresentSingle = () => {
           </React.Fragment>
         );
       })}
-
-      <Button
-        onClick={() => {
-          dispatch(setCurrentWordCompleted());
-          navigate("/select");
-        }}
-      >
-        Complete
-      </Button>
-
-      <FooterButtons showButtonCondition={isCompleted} link="/presentPlural" />
     </div>
   );
 };

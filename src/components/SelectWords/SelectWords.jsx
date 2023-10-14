@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Radio, Space } from "antd";
-import { FooterButtons } from "../FooterButtons/FooterButtons";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentWord } from "../../redux/reducers/wordsSlice";
+import { completeStep } from "../../redux/reducers/stepsSlice";
 
 export const SelectWords = () => {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ export const SelectWords = () => {
   function handleChangeValue(e) {
     setValue(e.target.value);
     dispatch(setCurrentWord(e.target.value));
+    dispatch(completeStep(true));
   }
 
   return (
@@ -25,8 +26,6 @@ export const SelectWords = () => {
           ))}
         </Space>
       </Radio.Group>
-
-      <FooterButtons link="/regelmassigWahl" showButtonCondition={value} />
     </div>
   );
 };

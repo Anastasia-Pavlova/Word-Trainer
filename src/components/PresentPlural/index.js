@@ -1,1 +1,1 @@
-export * from "./PresentSingle";
+export * from "./PresentPlural";

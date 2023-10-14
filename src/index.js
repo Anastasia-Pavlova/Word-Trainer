@@ -11,6 +11,7 @@ import { PresentSingle } from "./components/PresentSingle/PresentSingle";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { PresentPlural } from "./components/PresentPlural/PresentPlural";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -38,17 +39,19 @@ const router = createBrowserRouter([
 ]);
 root.render(
   <React.StrictMode>
-    <ConfigProvider
-      theme={{
-        algorithm: theme.darkAlgorithm,
-      }}
-    >
-      <Provider store={store}>
-        <Layout style={{ height: "100vh" }}>
-          <RouterProvider router={router} />
-        </Layout>
-      </Provider>
-    </ConfigProvider>
+    <ErrorBoundary>
+      <ConfigProvider
+        theme={{
+          algorithm: theme.darkAlgorithm,
+        }}
+      >
+        <Provider store={store}>
+          <Layout style={{ minHeight: "100vh" }}>
+            <RouterProvider router={router} />
+          </Layout>
+        </Provider>
+      </ConfigProvider>
+    </ErrorBoundary>
   </React.StrictMode>
 );
 
