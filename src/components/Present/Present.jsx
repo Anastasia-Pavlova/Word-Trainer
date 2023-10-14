@@ -1,29 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Divider, Button } from "antd";
-import { SelectionBlock } from "../SelectionBlock";
+import { Typography, Divider } from "antd";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentWordCompleted } from "../../redux/reducers/wordsSlice";
-import { useNavigate, Link } from "react-router-dom";
 import { completeStep } from "../../redux/reducers/stepsSlice";
+import { SelectionBlock } from "../SelectionBlock";
 
 const { Title, Text } = Typography;
 
-export const PresentPlural = () => {
+export const PresentSingle = ({ quantityForm }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { list, currentWord } = useSelector((state) => state.words);
   const [completed, setCompleted] = useState([]);
+
   const word = list.find((word) => word.word === currentWord);
-
-  function handleCompleteBlock(index) {
-    setCompleted((prev) => [...prev.filter((v) => v !== index), index]);
-  }
-
   const isCompleted = completed.length === 6;
 
   useEffect(() => {
     isCompleted && dispatch(completeStep(true));
   }, [completed]);
+
+  function handleCompleteBlock(index) {
+    setCompleted((prev) => [...prev.filter((v) => v !== index), index]);
+  }
 
   if (!word) {
     return (
@@ -39,12 +37,8 @@ export const PresentPlural = () => {
       <Title level={5}>{word.root}</Title>
 
       {Array.from(Array(3).keys()).map((v, i) => {
-        const name =
-          i === 0
-            ? "Четвертая форма"
-            : i === 1
-            ? "Пятая форма"
-            : "Шестая форма";
+        const name = `${i + (quantityForm === "single" ? 1 : 4)} form`;
+
         return (
           <React.Fragment key={v}>
             <div>
@@ -53,8 +47,8 @@ export const PresentPlural = () => {
               <SelectionBlock
                 index={`${v}ending`}
                 word={word}
-                quantity={"plural"}
-                person={i + 4}
+                quantity={quantityForm}
+                person={i + (quantityForm === "single" ? 1 : 4)}
                 wordPart={"ending"}
                 handleComplete={handleCompleteBlock}
               />
@@ -62,8 +56,8 @@ export const PresentPlural = () => {
               <SelectionBlock
                 index={`${v}vowel`}
                 word={word}
-                quantity={"plural"}
-                person={i + 4}
+                quantity={quantityForm}
+                person={i + (quantityForm === "single" ? 1 : 4)}
                 wordPart={"vowel"}
                 handleComplete={handleCompleteBlock}
               />
@@ -72,15 +66,6 @@ export const PresentPlural = () => {
           </React.Fragment>
         );
       })}
-
-      <Button
-        onClick={() => {
-          dispatch(setCurrentWordCompleted());
-          navigate("/select");
-        }}
-      >
-        Complete
-      </Button>
     </div>
   );
 };

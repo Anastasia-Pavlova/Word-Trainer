@@ -1,17 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { SelectWords } from "./components/SelectWords";
-import { RegularVerbs } from "./components/RegularVerbs";
-import { ConfigProvider, Layout, theme } from "antd";
-import { PresentSingle } from "./components/PresentSingle/PresentSingle";
+import { createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import { PresentPlural } from "./components/PresentPlural/PresentPlural";
+import reportWebVitals from "./reportWebVitals";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import App from "./App";
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -20,37 +15,15 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
   },
-  {
-    path: "/select",
-    element: <SelectWords />,
-  },
-  {
-    path: "/regelmassigWahl",
-    element: <RegularVerbs />,
-  },
-  {
-    path: "/presentSingle",
-    element: <PresentSingle />,
-  },
-  {
-    path: "/presentPlural",
-    element: <PresentPlural />,
-  },
 ]);
+
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
-      <ConfigProvider
-        theme={{
-          algorithm: theme.darkAlgorithm,
-        }}
-      >
-        <Provider store={store}>
-          <Layout style={{ minHeight: "100vh" }}>
-            <RouterProvider router={router} />
-          </Layout>
-        </Provider>
-      </ConfigProvider>
+      <Provider store={store}>
+        <App />
+        {/* <RouterProvider router={router} /> */}
+      </Provider>
     </ErrorBoundary>
   </React.StrictMode>
 );
