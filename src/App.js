@@ -11,6 +11,8 @@ import {
 } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
+import Input from "antd/es/input/Input";
+import { FileOutlined } from "@ant-design/icons";
 import { changeAlgorithm } from "./redux/reducers/themeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { FooterButtons } from "./components/FooterButtons";
@@ -20,7 +22,7 @@ import { SelectWords } from "./components/SelectWords";
 import { RegularVerbs } from "./components/RegularVerbs";
 import { PresentSingle } from "./components/Present";
 
-import data from "./WordsArray.json";
+import data from "./example.json";
 import "./App.css";
 
 const { Text } = Typography;
@@ -33,6 +35,16 @@ function App() {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const stepTitles = [
+    "Choose the file",
+    "Select words",
+    "Is the word regular",
+    "Present (1)",
+    "Present (2)",
+    "Präteritum (1)",
+    "Präteritum (2)",
+  ];
+
   const onStepChange = (value) => {
     setCurrent(value);
   };
@@ -42,6 +54,7 @@ function App() {
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
+        const data = JSON.parse(e.target.result);
         dispatch(addWords(data));
         dispatch(completeStep(true));
       } catch (error) {
@@ -68,10 +81,11 @@ function App() {
         return (
           <>
             <div>
-              <input
+              <Input
                 type="file"
                 onChange={handleUpload}
                 className="uploadInput"
+                prefix={<FileOutlined />}
               />
             </div>
             <Text>or</Text>
@@ -126,6 +140,7 @@ function App() {
         <div style={{ textAlign: "center", margin: 50 }}>
           <Layout hasSider>
             <Sider
+              width={window.innerWidth > 700 ? 200 : 50}
               style={{
                 background:
                   globalTheme.algorithm === "defaultAlgorithm" &&
@@ -136,29 +151,11 @@ function App() {
                 current={current}
                 onChange={onStepChange}
                 direction="vertical"
-                items={[
-                  {
-                    title: "Choose the file",
-                  },
-                  {
-                    title: "Select words",
-                  },
-                  {
-                    title: "Is the word regular",
-                  },
-                  {
-                    title: "Present (1)",
-                  },
-                  {
-                    title: "Present (2)",
-                  },
-                  {
-                    title: "Präteritum (1)",
-                  },
-                  {
-                    title: "Präteritum  (2)",
-                  },
-                ]}
+                items={stepTitles.map((stepTitle) => {
+                  return {
+                    title: window.innerWidth > 700 ? stepTitle : "",
+                  };
+                })}
               />
             </Sider>
             <Content>{getStepData(current)}</Content>
