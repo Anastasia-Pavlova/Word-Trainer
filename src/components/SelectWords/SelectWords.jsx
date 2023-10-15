@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentWord } from "../../redux/reducers/wordsSlice";
 import { completeStep } from "../../redux/reducers/stepsSlice";
 
-export const SelectWords = () => {
+export const SelectWords = ({ currentStep }) => {
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
   const words = useSelector((state) => state.words.list);
@@ -12,7 +12,7 @@ export const SelectWords = () => {
   function handleChangeValue(e) {
     setValue(e.target.value);
     dispatch(setCurrentWord(e.target.value));
-    dispatch(completeStep(true));
+    dispatch(completeStep(currentStep));
   }
 
   return (

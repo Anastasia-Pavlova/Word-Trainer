@@ -7,7 +7,7 @@ import { SelectionBlock } from "../SelectionBlock";
 
 const { Title, Text } = Typography;
 
-export const PresentSingle = ({ quantityForm }) => {
+export const PresentSingle = ({ quantityForm, currentStep }) => {
   const dispatch = useDispatch();
   const { list, currentWord } = useSelector((state) => state.words);
   const [completed, setCompleted] = useState([]);
@@ -16,7 +16,7 @@ export const PresentSingle = ({ quantityForm }) => {
   const isCompleted = completed.length === 6;
 
   useEffect(() => {
-    isCompleted && dispatch(completeStep(true));
+    isCompleted && dispatch(completeStep(currentStep));
   }, [completed]);
 
   function handleCompleteBlock(index) {

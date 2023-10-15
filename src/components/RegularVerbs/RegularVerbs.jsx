@@ -7,7 +7,7 @@ import "./RegularVerbs.css";
 
 const { Title, Text } = Typography;
 
-export const RegularVerbs = () => {
+export const RegularVerbs = ({ currentStep }) => {
   const { list, currentWord } = useSelector((state) => state.words);
   const [selectedOption, setSelectedOption] = useState("");
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export const RegularVerbs = () => {
   function handleSelectAnswer(isRegular) {
     setSelectedOption(isRegular);
     if (isRegular === word.isRegular) {
-      dispatch(completeStep(true));
+      dispatch(completeStep(currentStep));
     }
   }
 

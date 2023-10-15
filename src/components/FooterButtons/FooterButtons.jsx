@@ -12,7 +12,7 @@ export const FooterButtons = ({
 
   function handleChangeStep(value) {
     onChangeStep(value);
-    dispatch(completeStep(false));
+    dispatch(completeStep(current));
   }
 
   return (
@@ -39,11 +39,13 @@ export const FooterButtons = ({
             Дальше
           </Button>
         )}
-        <Button size="small" danger onClick={() => handleChangeStep(1)}>
-          Дальше
-          <br />
-          (правильного ответа не существует)
-        </Button>
+        {current > 1 && (
+          <Button size="small" danger onClick={() => handleChangeStep(1)}>
+            Дальше
+            <br />
+            (правильного ответа не существует)
+          </Button>
+        )}
       </Space>
     </div>
   );

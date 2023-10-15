@@ -56,7 +56,7 @@ function App() {
       try {
         const data = JSON.parse(e.target.result);
         dispatch(addWords(data));
-        dispatch(completeStep(true));
+        dispatch(completeStep(current));
       } catch (error) {
         console.error("Error parsing JSON file:", error);
       }
@@ -67,7 +67,7 @@ function App() {
 
   function handleUseSampleFile() {
     dispatch(addWords(data));
-    dispatch(completeStep(true));
+    dispatch(completeStep(current));
   }
 
   function handleChangeTheme(checked) {
@@ -96,16 +96,16 @@ function App() {
         );
 
       case 1:
-        return <SelectWords />;
+        return <SelectWords currentStep={current} />;
 
       case 2:
-        return <RegularVerbs />;
+        return <RegularVerbs currentStep={current} />;
 
       case 3:
-        return <PresentSingle quantityForm={"single"} />;
+        return <PresentSingle quantityForm={"single"} currentStep={current} />;
 
       case 4:
-        return <PresentSingle quantityForm={"plural"} />;
+        return <PresentSingle quantityForm={"plural"} currentStep={current} />;
 
       default:
         break;
@@ -151,9 +151,12 @@ function App() {
                 current={current}
                 onChange={onStepChange}
                 direction="vertical"
-                items={stepTitles.map((stepTitle) => {
+                items={stepTitles.map((stepTitle, index) => {
                   return {
                     title: window.innerWidth > 700 ? stepTitle : "",
+                    disabled:
+                      !steps.completedSteps.includes(index) &&
+                      current <= index - 1,
                   };
                 })}
               />
@@ -161,8 +164,10 @@ function App() {
             <Content>{getStepData(current)}</Content>
             <Footer>
               <FooterButtons
-                current
-                showButtonCondition={steps.isStepCompleted}
+                current={current}
+                showButtonCondition={steps.completedSteps.some(
+                  (step) => step === current
+                )}
                 onChangeStep={(value) => setCurrent(current + value)}
               />
             </Footer>

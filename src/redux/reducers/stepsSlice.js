@@ -3,11 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 export const stepsSlice = createSlice({
   name: "steps",
   initialState: {
-    isStepCompleted: false,
+    completedSteps: [],
   },
   reducers: {
     completeStep: (state, action) => {
-      state.isStepCompleted = action.payload;
+      state.completedSteps = [
+        ...state.completedSteps.filter((v) => v !== action.payload),
+        action.payload,
+      ];
     },
   },
 });
