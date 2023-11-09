@@ -1,15 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  Button,
-  ConfigProvider,
-  Layout,
-  Space,
-  Steps,
-  Switch,
-  Typography,
-  theme,
-} from "antd";
-import { Content, Footer, Header } from "antd/es/layout/layout";
+import { Button, ConfigProvider, Layout, Steps, Typography, theme } from "antd";
+import { Content, Footer } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import Input from "antd/es/input/Input";
 import { FileOutlined } from "@ant-design/icons";
@@ -24,6 +15,7 @@ import { PresentSingle } from "./components/Present";
 
 import data from "./example.json";
 import "./App.css";
+import { Header } from "./components/Header/Header";
 
 const { Text } = Typography;
 
@@ -75,12 +67,6 @@ function App() {
     dispatch(completeStep(current));
   }
 
-  function handleChangeTheme(checked) {
-    const value = checked ? "darkAlgorithm" : "defaultAlgorithm";
-    dispatch(changeAlgorithm(value));
-    localStorage.setItem("theme", value);
-  }
-
   function getStepData(step) {
     switch (step) {
       case 0:
@@ -125,52 +111,53 @@ function App() {
       }}
     >
       <Layout style={{ minHeight: "100vh" }}>
-        <Header
-          style={{
-            textAlign: "right",
-            background:
-              globalTheme.algorithm === "defaultAlgorithm" && colorBgContainer,
-          }}
-        >
-          <Space>
-            <Switch
-              checked={globalTheme.algorithm === "darkAlgorithm"}
-              onChange={handleChangeTheme}
-            />
-            <Text>
-              {globalTheme.algorithm === "darkAlgorithm" ? (
-                <>Dark &#127769;</>
-              ) : (
-                <>Light &#9728;</>
-              )}
-            </Text>
-          </Space>
-        </Header>
+        <Header />
+
         <div style={{ textAlign: "center", margin: 50 }}>
-          <Layout hasSider>
-            <Sider
-              width={window.innerWidth > 700 ? 200 : 50}
-              style={{
-                background:
-                  globalTheme.algorithm === "defaultAlgorithm" &&
-                  colorBgContainer,
-              }}
-            >
+          <Layout hasSider={window.innerWidth > 700}>
+            {window.innerWidth > 700 ? (
+              <Sider
+                width={200}
+                style={{
+                  background:
+                    globalTheme.algorithm === "defaultAlgorithm" &&
+                    colorBgContainer,
+                }}
+              >
+                <Steps
+                  current={current}
+                  onChange={onStepChange}
+                  direction="vertical"
+                  items={stepTitles.map((stepTitle, index) => {
+                    return {
+                      title: stepTitle,
+                      disabled:
+                        !steps.completedSteps.includes(index) &&
+                        current <= index - 1,
+                    };
+                  })}
+                />
+              </Sider>
+            ) : (
               <Steps
+                style={{ flexWrap: "wrap" }}
                 current={current}
                 onChange={onStepChange}
-                direction="vertical"
+                type="inline"
+                responsive={false}
                 items={stepTitles.map((stepTitle, index) => {
                   return {
-                    title: window.innerWidth > 700 ? stepTitle : "",
+                    title: stepTitle,
                     disabled:
                       !steps.completedSteps.includes(index) &&
                       current <= index - 1,
                   };
                 })}
               />
-            </Sider>
+            )}
+
             <Content>{getStepData(current)}</Content>
+
             <Footer>
               <FooterButtons
                 current={current}
