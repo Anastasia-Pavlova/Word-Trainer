@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Space } from "antd";
+import { Button, Flex } from "antd";
 import { useDispatch } from "react-redux";
 import { completeStep } from "../../redux/reducers/stepsSlice";
 
@@ -24,7 +24,7 @@ export const FooterButtons = ({
         transform: "translateX(-50%)",
       }}
     >
-      <Space>
+      <Flex wrap="wrap" gap="small">
         {current > 0 && (
           <Button size="large" onClick={() => handleChangeStep(-1)}>
             Back
@@ -46,7 +46,7 @@ export const FooterButtons = ({
             (правильного ответа не существует)
           </Button>
         )}
-      </Space>
+      </Flex>
     </div>
   );
 };
