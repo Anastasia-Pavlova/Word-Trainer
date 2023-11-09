@@ -1,4 +1,4 @@
-# Verb Trainer App
+# Word Trainer App
 
 Run the application with:
 

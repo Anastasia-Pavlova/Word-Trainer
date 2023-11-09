@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   ConfigProvider,
@@ -45,6 +45,11 @@ function App() {
     "Präteritum (2)",
   ];
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    savedTheme && dispatch(changeAlgorithm(savedTheme));
+  }, []);
+
   const onStepChange = (value) => {
     setCurrent(value);
   };
@@ -73,6 +78,7 @@ function App() {
   function handleChangeTheme(checked) {
     const value = checked ? "darkAlgorithm" : "defaultAlgorithm";
     dispatch(changeAlgorithm(value));
+    localStorage.setItem("theme", value);
   }
 
   function getStepData(step) {
@@ -127,7 +133,10 @@ function App() {
           }}
         >
           <Space>
-            <Switch defaultChecked onChange={handleChangeTheme} />
+            <Switch
+              checked={globalTheme.algorithm === "darkAlgorithm"}
+              onChange={handleChangeTheme}
+            />
             <Text>
               {globalTheme.algorithm === "darkAlgorithm" ? (
                 <>Dark &#127769;</>
