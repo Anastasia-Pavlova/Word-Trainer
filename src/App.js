@@ -12,8 +12,10 @@ import { Present } from "./components/Present";
 import { Header } from "./components/Header/Header";
 import { UploadDocument } from "./components/UploadDocument/UploadDocument";
 import "./App.css";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t } = useTranslation();
   const { steps, theme: globalTheme } = useSelector((state) => state);
   const [current, setCurrent] = useState(0);
   const dispatch = useDispatch();
@@ -22,13 +24,13 @@ function App() {
   } = theme.useToken();
 
   const stepTitles = [
-    "Choose the file",
-    "Select words",
-    "Is the word regular",
-    "Present (1)",
-    "Present (2)",
-    "Präteritum (1)",
-    "Präteritum (2)",
+    t("choose_file"),
+    t("select_words"),
+    t("regular"),
+    t("Present (1)"),
+    t("Present (2)"),
+    t("Präteritum (1)"),
+    t("Präteritum (2)"),
   ];
 
   useEffect(() => {

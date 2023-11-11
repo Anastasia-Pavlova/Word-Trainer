@@ -1,0 +1,16 @@
+{
+  "dark": "Dark",
+  "light": "Light",
+  "back": "Back",
+  "continue": "Continue",
+  "no_answer": "No Answer",
+  "upload": "Upload",
+  "or": "or",
+  "use_sample_file": "Use Sample File",
+  "choose_file": "Choose the file",
+  "select_words": "Select words",
+  "regular": "Is the word regular",
+  "choose_word": "Please, choose the words you want to train",
+  "is_regular": "Is the word regular?",
+  "choose_endings": "Please, choose the correct endings"
+}

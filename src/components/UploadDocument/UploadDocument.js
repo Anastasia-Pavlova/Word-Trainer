@@ -5,10 +5,12 @@ import { useDispatch } from "react-redux";
 import { addWords } from "../../redux/reducers/wordsSlice";
 import { completeStep } from "../../redux/reducers/stepsSlice";
 import data from "../../example.json";
+import { useTranslation } from "react-i18next";
 
 const { Text } = Typography;
 
 export const UploadDocument = ({ currentStep }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   function handleBeforeUpload(file) {
@@ -34,12 +36,12 @@ export const UploadDocument = ({ currentStep }) => {
     <>
       <Upload accept=".json" showUploadList beforeUpload={handleBeforeUpload}>
         <Button type="primary" icon={<UploadOutlined />}>
-          Upload
+          {t("upload")}
         </Button>
       </Upload>
-      <Text>or</Text>
+      <Text>{t("or")}</Text>
       <div>
-        <Button onClick={handleUseSampleFile}>Use sample file</Button>
+        <Button onClick={handleUseSampleFile}>{t("use_sample_file")}</Button>
       </div>
     </>
   );

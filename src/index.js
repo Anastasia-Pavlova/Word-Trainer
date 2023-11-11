@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import "./i18n";
 import reportWebVitals from "./reportWebVitals";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import App from "./App";

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { completeStep } from "../../redux/reducers/stepsSlice";
 import "./RegularVerbs.css";
+import { t } from "i18next";
 
 const { Title, Text } = Typography;
 
@@ -33,6 +34,7 @@ export const RegularVerbs = ({ currentStep }) => {
     <div style={{ textAlign: "center", margin: 50 }}>
       {word.word ? (
         <Space direction="vertical">
+          <Title level={3}>{t("is_regular")}</Title>
           <Title level={3}>{word.word}</Title>
           <p style={{ size: "30px", color: "rgb(250, 173, 20)" }}>
             {word.translation}

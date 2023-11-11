@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { completeStep } from "../../redux/reducers/stepsSlice";
 import { SelectionBlock } from "../SelectionBlock";
+import { t } from "i18next";
 
 const { Title, Text } = Typography;
 
@@ -40,6 +41,7 @@ export const Present = ({ quantityForm, currentStep }) => {
 
   return (
     <div style={{ textAlign: "center", margin: 50 }}>
+      <Title level={3}>{t("choose_endings")}</Title>
       <Title level={3}>Presence</Title>
       <Title level={5}>{word.root}</Title>
 

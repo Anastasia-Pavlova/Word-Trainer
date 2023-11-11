@@ -2,12 +2,14 @@ import React from "react";
 import { Button, Flex } from "antd";
 import { useDispatch } from "react-redux";
 import { completeStep } from "../../redux/reducers/stepsSlice";
+import { useTranslation } from "react-i18next";
 
 export const FooterButtons = ({
   current,
   showButtonCondition,
   onChangeStep,
 }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   function handleChangeStep(value) {
@@ -27,7 +29,7 @@ export const FooterButtons = ({
       <Flex wrap="wrap" gap="small" justify="center">
         {current > 0 && (
           <Button size="large" onClick={() => handleChangeStep(-1)}>
-            Back
+            {t("back")}
           </Button>
         )}
         {showButtonCondition && (
@@ -36,14 +38,13 @@ export const FooterButtons = ({
             type="primary"
             onClick={() => handleChangeStep(1)}
           >
-            Дальше
+            {t("continue")}
           </Button>
         )}
         {current > 1 && (
           <Button size="small" danger onClick={() => handleChangeStep(1)}>
-            Дальше
-            <br />
-            (правильного ответа не существует)
+            {t("continue")}
+            <br />( {t("no_answer")})
           </Button>
         )}
       </Flex>

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Radio, Space } from "antd";
+import { Radio, Space, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { t } from "i18next";
 import { setCurrentWord } from "../../redux/reducers/wordsSlice";
 import { completeStep } from "../../redux/reducers/stepsSlice";
+
+const { Title } = Typography;
 
 export const SelectWords = ({ currentStep }) => {
   const dispatch = useDispatch();
@@ -16,7 +19,9 @@ export const SelectWords = ({ currentStep }) => {
   }
 
   return (
-    <div style={{ textAlign: "center", margin: 50 }}>
+    <Space direction="vertical">
+      <Title level={4}>{t("choose_word")}</Title>
+
       <Radio.Group value={value} onChange={handleChangeValue}>
         <Space direction="vertical">
           {words.map((word) => (
@@ -26,6 +31,6 @@ export const SelectWords = ({ currentStep }) => {
           ))}
         </Space>
       </Radio.Group>
-    </div>
+    </Space>
   );
 };
