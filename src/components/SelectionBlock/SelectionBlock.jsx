@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "antd";
+import { Button, Space } from "antd";
 
 import answers from "../../answers.json";
+import { CheckCircleTwoTone } from "@ant-design/icons";
 
 export const SelectionBlock = ({
   index,
@@ -13,16 +14,23 @@ export const SelectionBlock = ({
 }) => {
   const [selectedValue, setSelectedValue] = useState();
   const [correctValues, setCorrectValues] = useState([]);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
     if (
       (correctValues.length && wordPart === "vowel") ||
       correctValues.length === word[quantity][person][wordPart].length
     ) {
-      console.log("complete");
+      setIsCompleted(true);
       handleComplete(index);
     }
   }, [correctValues.length]);
+
+  useEffect(() => {
+    setIsCompleted(false);
+    setCorrectValues([]);
+    setSelectedValue();
+  }, [quantity]);
 
   const isCorrect =
     wordPart === "ending"
@@ -40,19 +48,26 @@ export const SelectionBlock = ({
 
   return (
     <div>
-      {answers[wordPart].map((v) => (
-        <Button
-          onClick={() => handleChangeValue(v)}
-          type={
-            correctValues.find((value) => value === v) ? "primary" : "default"
-          }
-          danger={selectedValue && selectedValue === v && !isCorrect}
-          key={v}
-          value={v}
-        >
-          {v}
-        </Button>
-      ))}
+      <Space>
+        <div>
+          {answers[wordPart].map((v) => (
+            <Button
+              onClick={() => handleChangeValue(v)}
+              type={
+                correctValues.find((value) => value === v)
+                  ? "primary"
+                  : "default"
+              }
+              danger={selectedValue && selectedValue === v && !isCorrect}
+              key={v}
+              value={v}
+            >
+              {v}
+            </Button>
+          ))}
+        </div>
+        {isCompleted && <CheckCircleTwoTone />}
+      </Space>
     </div>
   );
 };

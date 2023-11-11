@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FooterButtons } from "./components/FooterButtons";
 import { SelectWords } from "./components/SelectWords";
 import { RegularVerbs } from "./components/RegularVerbs";
-import { PresentSingle } from "./components/Present";
+import { Present } from "./components/Present";
 import { Header } from "./components/Header/Header";
 import { UploadDocument } from "./components/UploadDocument/UploadDocument";
 import "./App.css";
@@ -52,10 +52,16 @@ function App() {
         return <RegularVerbs currentStep={current} />;
 
       case 3:
-        return <PresentSingle quantityForm={"single"} currentStep={current} />;
+        return <Present quantityForm={"single"} currentStep={current} />;
 
       case 4:
-        return <PresentSingle quantityForm={"plural"} currentStep={current} />;
+        return <Present quantityForm={"plural"} currentStep={current} />;
+
+      case 5:
+        return <Present quantityForm={"single"} currentStep={current} />;
+
+      case 6:
+        return <Present quantityForm={"plural"} currentStep={current} />;
 
       default:
         break;

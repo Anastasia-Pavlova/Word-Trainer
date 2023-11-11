@@ -7,17 +7,24 @@ import { SelectionBlock } from "../SelectionBlock";
 
 const { Title, Text } = Typography;
 
-export const PresentSingle = ({ quantityForm, currentStep }) => {
+export const Present = ({ quantityForm, currentStep }) => {
   const dispatch = useDispatch();
   const { list, currentWord } = useSelector((state) => state.words);
   const [completed, setCompleted] = useState([]);
 
   const word = list.find((word) => word.word === currentWord);
+
   const isCompleted = completed.length === 6;
 
   useEffect(() => {
-    isCompleted && dispatch(completeStep(currentStep));
+    if (isCompleted) {
+      dispatch(completeStep(currentStep));
+    }
   }, [completed]);
+
+  useEffect(() => {
+    setCompleted([]);
+  }, [currentStep]);
 
   function handleCompleteBlock(index) {
     setCompleted((prev) => [...prev.filter((v) => v !== index), index]);

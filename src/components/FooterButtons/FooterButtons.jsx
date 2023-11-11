@@ -24,7 +24,7 @@ export const FooterButtons = ({
         transform: "translateX(-50%)",
       }}
     >
-      <Flex wrap="wrap" gap="small">
+      <Flex wrap="wrap" gap="small" justify="center">
         {current > 0 && (
           <Button size="large" onClick={() => handleChangeStep(-1)}>
             Back
