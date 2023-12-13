@@ -1,5 +1,5 @@
-import { UploadOutlined } from "@ant-design/icons";
-import { Button, Upload, Typography } from "antd";
+import { InfoCircleOutlined, UploadOutlined } from "@ant-design/icons";
+import { Button, Upload, Typography, Tooltip } from "antd";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addWords } from "../../redux/reducers/wordsSlice";
@@ -35,9 +35,11 @@ export const UploadDocument = ({ currentStep }) => {
   return (
     <>
       <Upload accept=".json" showUploadList beforeUpload={handleBeforeUpload}>
-        <Button type="primary" icon={<UploadOutlined />}>
-          {t("upload")}
-        </Button>
+        <Tooltip title={t("upload_tip")}>
+          <Button type="primary" icon={<UploadOutlined />}>
+            {t("upload")}
+          </Button>
+        </Tooltip>
       </Upload>
       <Text>{t("or")}</Text>
       <div>
