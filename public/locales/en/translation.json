@@ -3,6 +3,7 @@
   "light": "Light",
   "back": "Back",
   "continue": "Continue",
+  "complete": "Complete",
   "no_answer": "No Answer",
   "upload": "Upload",
   "or": "or",
@@ -12,5 +13,6 @@
   "regular": "Is the word regular",
   "choose_word": "Please, choose the words you want to train",
   "is_regular": "Is the word regular?",
-  "choose_endings": "Please, choose the correct endings"
+  "choose_endings": "Please, choose the correct endings",
+  "upload_tip": "Use .json format for the files"
 }
