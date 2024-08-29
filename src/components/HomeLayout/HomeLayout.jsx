@@ -1,24 +1,30 @@
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { ConfigProvider, Layout, Steps, theme } from "antd";
-import { Content, Footer } from "antd/es/layout/layout";
-import Sider from "antd/es/layout/Sider";
-import { changeAlgorithm } from "./redux/reducers/themeSlice";
-import { useDispatch, useSelector } from "react-redux";
+'use client';
 
-import { FooterButtons } from "./components/FooterButtons";
-import { SelectWords } from "./components/SelectWords";
-import { RegularVerbs } from "./components/RegularVerbs";
-import { Present } from "./components/Present";
-import { Header } from "./components/Header/Header";
-import { UploadDocument } from "./components/UploadDocument/UploadDocument";
-import "./App.css";
-import { setCurrentWordCompleted } from "./redux/reducers/wordsSlice";
+import { ConfigProvider, Layout, Steps, Typography, theme } from 'antd';
+import Sider from 'antd/es/layout/Sider';
+import { Content, Footer } from 'antd/es/layout/layout';
+import { useTranslation } from 'next-i18next';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useDeviceSize } from '../../hooks/useDeviceSize';
+import { resetSteps } from '../../redux/reducers/stepsSlice';
+import { changeAlgorithm } from '../../redux/reducers/themeSlice';
+import { setCurrentWordCompleted } from '../../redux/reducers/wordsSlice';
+import { FooterButtons } from '../FooterButtons';
+import { Header } from '../Header/Header';
+import { Present } from '../Present';
+import { RegularVerbs } from '../RegularVerbs';
+import { SelectWords } from '../SelectWords';
+import { UploadDocument } from '../UploadDocument';
 
-function App() {
+const { Text } = Typography;
+
+export function HomeLayout() {
   const { t } = useTranslation();
+  const [width, height] = useDeviceSize();
   const { steps, theme: globalTheme } = useSelector((state) => state);
   const { currentWord } = useSelector((state) => state.words);
+  const words = useSelector((state) => state.words.list);
   const [current, setCurrent] = useState(0);
   const dispatch = useDispatch();
   const {
@@ -26,17 +32,17 @@ function App() {
   } = theme.useToken();
 
   const stepTitles = [
-    t("choose_file"),
-    t("select_words"),
-    t("regular"),
-    t("Present (1)"),
-    t("Present (2)"),
+    t('choose_file'),
+    t('select_words'),
+    t('regular'),
+    t('Present (1)'),
+    t('Present (2)'),
     // t("Präteritum (1)"),
     // t("Präteritum (2)"),
   ];
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
+    const savedTheme = localStorage.getItem('theme');
     savedTheme && dispatch(changeAlgorithm(savedTheme));
   }, []);
 
@@ -45,8 +51,12 @@ function App() {
   };
 
   const handleComplete = () => {
+    const isCompleted = steps.completedSteps.some(
+      (step) => step.step === current
+    );
     setCurrent(1);
-    dispatch(setCurrentWordCompleted(currentWord));
+    dispatch(setCurrentWordCompleted(isCompleted));
+    dispatch(resetSteps());
   };
 
   function getStepData(step) {
@@ -61,10 +71,10 @@ function App() {
         return <RegularVerbs currentStep={current} />;
 
       case 3:
-        return <Present quantityForm={"single"} currentStep={current} />;
+        return <Present quantityForm={'single'} currentStep={current} />;
 
       case 4:
-        return <Present quantityForm={"plural"} currentStep={current} />;
+        return <Present quantityForm={'plural'} currentStep={current} />;
 
       // case 5:
       //   return <Present quantityForm={"single"} currentStep={current} />;
@@ -83,18 +93,18 @@ function App() {
         algorithm: theme[globalTheme.algorithm],
       }}
     >
-      <Layout style={{ minHeight: "100vh" }}>
-        {window.innerWidth > 700 && (
+      <Layout style={{ minHeight: '100vh' }}>
+        {width > 700 && (
           <Sider
             width={300}
             style={{
               background:
-                globalTheme.algorithm === "defaultAlgorithm" &&
+                globalTheme.algorithm === 'defaultAlgorithm' &&
                 colorBgContainer,
             }}
           >
             <Steps
-              style={{ margin: "50px 0 0 50px" }}
+              style={{ margin: '50px 0 0 50px' }}
               current={current}
               onChange={onStepChange}
               direction="vertical"
@@ -109,12 +119,13 @@ function App() {
             />
           </Sider>
         )}
+
         <Layout>
           <Header />
-          <div style={{ textAlign: "center", margin: 0 }}>
-            {window.innerWidth <= 700 && (
+          <div style={{ textAlign: 'center', margin: 0 }}>
+            {width <= 700 && (
               <Steps
-                style={{ flexWrap: "wrap" }}
+                style={{ flexWrap: 'wrap' }}
                 current={current}
                 onChange={onStepChange}
                 type="inline"
@@ -137,17 +148,19 @@ function App() {
             <FooterButtons
               current={current}
               showButtonCondition={steps.completedSteps.some(
-                (step) => step === current
+                (step) => step.step === current
               )}
               isLast={current === stepTitles.length - 1}
               onChangeStep={(value) => setCurrent(current + value)}
               onComplete={handleComplete}
             />
+            <Text>
+              Completed words: {words.filter((v) => v.isCompleted).length} from{' '}
+              {words.length}
+            </Text>
           </Footer>
         </Layout>
       </Layout>
     </ConfigProvider>
   );
 }
-
-export default App;

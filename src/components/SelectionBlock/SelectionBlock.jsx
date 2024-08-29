@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Button, Space } from "antd";
+'use client';
 
-import answers from "../../answers.json";
-import { CheckCircleTwoTone } from "@ant-design/icons";
+import { Button, Space } from 'antd';
+import { useEffect, useState } from 'react';
+
+import { CheckCircleTwoTone } from '@ant-design/icons';
+import answers from '../../answers.json';
 
 export const SelectionBlock = ({
   index,
@@ -18,7 +20,7 @@ export const SelectionBlock = ({
 
   useEffect(() => {
     if (
-      (correctValues.length && wordPart === "vowel") ||
+      (correctValues.length && wordPart === 'vowel') ||
       correctValues.length === word[quantity][person][wordPart].length
     ) {
       setIsCompleted(true);
@@ -33,14 +35,14 @@ export const SelectionBlock = ({
   }, [quantity]);
 
   const isCorrect =
-    wordPart === "ending"
+    wordPart === 'ending'
       ? word[quantity][person][wordPart]?.some((v) => v === selectedValue)
       : word[quantity][person][wordPart] === selectedValue;
 
   function handleChangeValue(value) {
     setSelectedValue(value);
     const isCorrect =
-      wordPart === "ending"
+      wordPart === 'ending'
         ? word[quantity][person][wordPart]?.some((v) => v === value)
         : word[quantity][person][wordPart] === value;
     isCorrect && setCorrectValues((prev) => [...prev, value]);
@@ -55,8 +57,8 @@ export const SelectionBlock = ({
               onClick={() => handleChangeValue(v)}
               type={
                 correctValues.find((value) => value === v)
-                  ? "primary"
-                  : "default"
+                  ? 'primary'
+                  : 'default'
               }
               danger={selectedValue && selectedValue === v && !isCorrect}
               key={v}

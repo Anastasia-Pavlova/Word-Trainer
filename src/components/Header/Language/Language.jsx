@@ -1,22 +1,25 @@
-import { Radio } from "antd";
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+'use client';
+
+import { Radio } from 'antd';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 export const Language = () => {
-  const { _t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const router = useRouter();
   const [language, setLanguage] = useState();
 
   useEffect(() => {
-    const lng = localStorage.getItem("language", i18n.language);
-    lng && i18n.changeLanguage(lng);
-    setLanguage(lng || "en");
+    const lng = router.pathname.replace('/', '');
+    setLanguage(router.locale || 'en');
   }, []);
 
   function handleChange(e) {
-    i18n.changeLanguage(e.target.value);
-    localStorage.setItem("language", e.target.value);
+    router.push('/', '/', { locale: e.target.value });
     setLanguage(e.target.value);
   }
+
   return (
     <Radio.Group
       value={language}

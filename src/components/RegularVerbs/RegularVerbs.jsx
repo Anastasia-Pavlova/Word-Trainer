@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import { Typography, Button, Space } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { completeStep } from "../../redux/reducers/stepsSlice";
-import "./RegularVerbs.css";
-import { t } from "i18next";
+'use client';
+
+import { Button, Space, Typography } from 'antd';
+import { t } from 'i18next';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { completeStep } from '../../redux/reducers/stepsSlice';
+import './RegularVerbs.css';
 
 const { Title, Text } = Typography;
 
 export const RegularVerbs = ({ currentStep }) => {
   const { list, currentWord } = useSelector((state) => state.words);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState('');
   const dispatch = useDispatch();
 
   const word = list.find((word) => word.word === currentWord);
@@ -18,7 +20,7 @@ export const RegularVerbs = ({ currentStep }) => {
   function handleSelectAnswer(isRegular) {
     setSelectedOption(isRegular);
     if (isRegular === word.isRegular) {
-      dispatch(completeStep(currentStep));
+      dispatch(completeStep({ step: currentStep, isCompleted: true }));
     }
   }
 
@@ -31,25 +33,25 @@ export const RegularVerbs = ({ currentStep }) => {
   }
 
   return (
-    <div style={{ textAlign: "center", margin: 50 }}>
+    <div style={{ textAlign: 'center', margin: 50 }}>
       {word.word ? (
         <Space direction="vertical">
-          <Title level={3}>{t("is_regular")}</Title>
+          <Title level={3}>{t('is_regular')}</Title>
           <Title level={3}>{word.word}</Title>
-          <p style={{ size: "30px", color: "rgb(250, 173, 20)" }}>
+          <p style={{ size: '30px', color: 'rgb(250, 173, 20)' }}>
             {word.translation}
           </p>
 
           <Space>
             <Button
-              type={selectedOption === true ? "primary" : "dashed"}
+              type={selectedOption === true ? 'primary' : 'dashed'}
               danger={selectedOption && selectedOption !== word.isRegular}
               onClick={() => handleSelectAnswer(true)}
             >
               Reg
             </Button>
             <Button
-              type={selectedOption === false ? "primary" : "dashed"}
+              type={selectedOption === false ? 'primary' : 'dashed'}
               danger={
                 selectedOption === false && selectedOption !== word.isRegular
               }
@@ -68,7 +70,7 @@ export const RegularVerbs = ({ currentStep }) => {
           </Space>
         </Space>
       ) : (
-        <div style={{ color: "#fff" }}>Такого слова нет в базе</div>
+        <div style={{ color: '#fff' }}>Такого слова нет в базе</div>
       )}
     </div>
   );

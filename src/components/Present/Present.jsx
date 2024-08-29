@@ -1,10 +1,12 @@
+'use client' 
+
+import { Divider, Typography } from "antd";
+import { t } from "i18next";
 import React, { useEffect, useState } from "react";
-import { Typography, Divider } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { completeStep } from "../../redux/reducers/stepsSlice";
 import { SelectionBlock } from "../SelectionBlock";
-import { t } from "i18next";
 
 const { Title, Text } = Typography;
 
@@ -19,7 +21,7 @@ export const Present = ({ quantityForm, currentStep }) => {
 
   useEffect(() => {
     if (isCompleted) {
-      dispatch(completeStep(currentStep));
+      dispatch(completeStep({ step: currentStep, isCompleted }));
     }
   }, [completed]);
 

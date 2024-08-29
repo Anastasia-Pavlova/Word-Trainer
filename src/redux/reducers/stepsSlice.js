@@ -8,13 +8,17 @@ export const stepsSlice = createSlice({
   reducers: {
     completeStep: (state, action) => {
       state.completedSteps = [
-        ...state.completedSteps.filter((v) => v !== action.payload),
-        action.payload,
+        ...state.completedSteps.filter((v) => v.step !== action.payload),
+        { step: action.payload.step, isCompleted: action.payload.isCompleted },
       ];
+    },
+
+    resetSteps: (state) => {
+      state.completedSteps = [];
     },
   },
 });
 
-export const { completeStep } = stepsSlice.actions;
+export const { completeStep, resetSteps } = stepsSlice.actions;
 
 export default stepsSlice.reducer;

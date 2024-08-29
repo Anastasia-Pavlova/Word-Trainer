@@ -1,10 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const wordsSlice = createSlice({
-  name: "words",
+  name: 'words',
   initialState: {
-    currentWord: "",
-    list: [],
+    currentWord: '',
+    list: [
+      {
+        isUsed: false,
+        isCompleted: false,
+      },
+    ],
   },
   reducers: {
     addWords: (state, action) => {
@@ -13,11 +18,12 @@ export const wordsSlice = createSlice({
     setCurrentWord: (state, action) => {
       state.currentWord = action.payload;
     },
-    setCurrentWordCompleted: (state) => {
+    setCurrentWordCompleted: (state, action) => {
       const wordIndex = state.list.findIndex(
         (word) => word.word === state.currentWord
       );
       state.list[wordIndex].isUsed = true;
+      state.list[wordIndex].isCompleted = action.payload;
     },
   },
 });
