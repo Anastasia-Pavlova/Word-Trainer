@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     "./build/types/**/*.ts",
-    "src/pages/_app.jsx"
+    "src/pages/_app.tsx"
   ],
   "exclude": ["node_modules"]
 }
