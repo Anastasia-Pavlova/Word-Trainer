@@ -5,13 +5,14 @@ import { Header as StandardHeader } from 'antd/es/layout/layout';
 import { useTranslation } from 'next-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeAlgorithm } from '../../redux/reducers/themeSlice';
-import { Language } from './Language/';
+import { RootState } from '../../redux/store';
+import { Language } from './Language';
 
 const { Text } = Typography;
 
 export const Header = () => {
   const { t } = useTranslation();
-  const { theme: globalTheme } = useSelector((state) => state);
+  const { theme: globalTheme } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const {
     token: { colorBgContainer },

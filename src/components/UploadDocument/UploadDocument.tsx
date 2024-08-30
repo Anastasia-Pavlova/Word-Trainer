@@ -18,10 +18,19 @@ export const UploadDocument = ({ currentStep }) => {
     const reader = new FileReader();
 
     reader.onload = (e) => {
-      console.log(JSON.parse(e.target.result));
-      const data = JSON.parse(e.target.result);
-      dispatch(addWords(data));
-      dispatch(completeStep(currentStep));
+      const result = e.target?.result;
+
+      if (typeof result === 'string') {
+        try {
+          const data = JSON.parse(result);
+          dispatch(addWords(data));
+          dispatch(completeStep(currentStep));
+        } catch (error) {
+          console.error('Error parsing JSON:', error);
+        }
+      } else {
+        console.error('Unexpected result type:', typeof result);
+      }
     };
     reader.readAsText(file);
 

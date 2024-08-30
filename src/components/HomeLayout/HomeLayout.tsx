@@ -10,6 +10,7 @@ import { useDeviceSize } from '../../hooks/useDeviceSize';
 import { resetSteps } from '../../redux/reducers/stepsSlice';
 import { changeAlgorithm } from '../../redux/reducers/themeSlice';
 import { setCurrentWordCompleted } from '../../redux/reducers/wordsSlice';
+import { RootState } from '../../redux/store';
 import { FooterButtons } from '../FooterButtons';
 import { Header } from '../Header/Header';
 import { Present } from '../Present';
@@ -21,10 +22,12 @@ const { Text } = Typography;
 
 export function HomeLayout() {
   const { t } = useTranslation();
-  const [width, height] = useDeviceSize();
-  const { steps, theme: globalTheme } = useSelector((state) => state);
-  const { currentWord } = useSelector((state) => state.words);
-  const words = useSelector((state) => state.words.list);
+  const [width] = useDeviceSize();
+  const { steps, theme: globalTheme } = useSelector(
+    (state: RootState) => state
+  );
+  const { currentWord } = useSelector((state: RootState) => state.words);
+  const words = useSelector((state: RootState) => state.words.list);
   const [current, setCurrent] = useState(0);
   const dispatch = useDispatch();
   const {
@@ -99,8 +102,9 @@ export function HomeLayout() {
             width={300}
             style={{
               background:
-                globalTheme.algorithm === 'defaultAlgorithm' &&
-                colorBgContainer,
+                globalTheme.algorithm === 'defaultAlgorithm'
+                  ? colorBgContainer
+                  : 'transparent',
             }}
           >
             <Steps
@@ -112,8 +116,10 @@ export function HomeLayout() {
                 return {
                   title: stepTitle,
                   disabled:
-                    !steps.completedSteps.includes(index) &&
-                    current <= index - 1,
+                    !steps.completedSteps.includes({
+                      step: index,
+                      isCompleted: true || false,
+                    }) && current <= index - 1,
                 };
               })}
             />
@@ -134,8 +140,10 @@ export function HomeLayout() {
                   return {
                     title: stepTitle,
                     disabled:
-                      !steps.completedSteps.includes(index) &&
-                      current <= index - 1,
+                      !steps.completedSteps.includes({
+                        step: index,
+                        isCompleted: true || false,
+                      }) && current <= index - 1,
                   };
                 })}
               />

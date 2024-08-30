@@ -1,16 +1,33 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+type WordSliceState = {
+  currentWord: string;
+  list: Array<{
+    word: string;
+    root?: string;
+    isRegular?: boolean;
+    translation?: boolean;
+    grundformen?: boolean;
+    examples?: Array<string>;
+    isUsed: boolean;
+    isCompleted: boolean;
+  }>;
+};
+
+const initialState: WordSliceState = {
+  currentWord: '',
+  list: [
+    {
+      word: '',
+      isUsed: false,
+      isCompleted: false,
+    },
+  ],
+};
 
 export const wordsSlice = createSlice({
   name: 'words',
-  initialState: {
-    currentWord: '',
-    list: [
-      {
-        isUsed: false,
-        isCompleted: false,
-      },
-    ],
-  },
+  initialState,
   reducers: {
     addWords: (state, action) => {
       state.list = action.payload;
@@ -18,7 +35,7 @@ export const wordsSlice = createSlice({
     setCurrentWord: (state, action) => {
       state.currentWord = action.payload;
     },
-    setCurrentWordCompleted: (state, action) => {
+    setCurrentWordCompleted: (state, action: PayloadAction<boolean>) => {
       const wordIndex = state.list.findIndex(
         (word) => word.word === state.currentWord
       );

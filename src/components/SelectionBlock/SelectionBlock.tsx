@@ -14,8 +14,8 @@ export const SelectionBlock = ({
   wordPart,
   handleComplete,
 }) => {
-  const [selectedValue, setSelectedValue] = useState();
-  const [correctValues, setCorrectValues] = useState([]);
+  const [selectedValue, setSelectedValue] = useState<string>('');
+  const [correctValues, setCorrectValues] = useState<Array<string>>([]);
   const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export const SelectionBlock = ({
   useEffect(() => {
     setIsCompleted(false);
     setCorrectValues([]);
-    setSelectedValue();
+    setSelectedValue('');
   }, [quantity]);
 
   const isCorrect =
@@ -60,7 +60,7 @@ export const SelectionBlock = ({
                   ? 'primary'
                   : 'default'
               }
-              danger={selectedValue && selectedValue === v && !isCorrect}
+              danger={!!selectedValue && selectedValue === v && !isCorrect}
               key={v}
               value={v}
             >

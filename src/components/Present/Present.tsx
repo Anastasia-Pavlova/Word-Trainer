@@ -1,19 +1,20 @@
-'use client' 
+'use client';
 
-import { Divider, Typography } from "antd";
-import { t } from "i18next";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { completeStep } from "../../redux/reducers/stepsSlice";
-import { SelectionBlock } from "../SelectionBlock";
+import { Divider, Typography } from 'antd';
+import { t } from 'i18next';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { completeStep } from '../../redux/reducers/stepsSlice';
+import { RootState } from '../../redux/store';
+import { SelectionBlock } from '../SelectionBlock';
 
 const { Title, Text } = Typography;
 
 export const Present = ({ quantityForm, currentStep }) => {
   const dispatch = useDispatch();
-  const { list, currentWord } = useSelector((state) => state.words);
-  const [completed, setCompleted] = useState([]);
+  const { list, currentWord } = useSelector((state: RootState) => state.words);
+  const [completed, setCompleted] = useState<Array<number>>([]);
 
   const word = list.find((word) => word.word === currentWord);
 
@@ -42,13 +43,13 @@ export const Present = ({ quantityForm, currentStep }) => {
   }
 
   return (
-    <div style={{ textAlign: "center", margin: 50 }}>
-      <Title level={3}>{t("choose_endings")}</Title>
+    <div style={{ textAlign: 'center', margin: 50 }}>
+      <Title level={3}>{t('choose_endings')}</Title>
       <Title level={3}>Presence</Title>
       <Title level={5}>{word.root}</Title>
 
       {Array.from(Array(3).keys()).map((v, i) => {
-        const name = `${i + (quantityForm === "single" ? 1 : 4)} form`;
+        const name = `${i + (quantityForm === 'single' ? 1 : 4)} form`;
 
         return (
           <React.Fragment key={v}>
@@ -59,8 +60,8 @@ export const Present = ({ quantityForm, currentStep }) => {
                 index={`${v}ending`}
                 word={word}
                 quantity={quantityForm}
-                person={i + (quantityForm === "single" ? 1 : 4)}
-                wordPart={"ending"}
+                person={i + (quantityForm === 'single' ? 1 : 4)}
+                wordPart={'ending'}
                 handleComplete={handleCompleteBlock}
               />
               <br />
@@ -68,8 +69,8 @@ export const Present = ({ quantityForm, currentStep }) => {
                 index={`${v}vowel`}
                 word={word}
                 quantity={quantityForm}
-                person={i + (quantityForm === "single" ? 1 : 4)}
-                wordPart={"vowel"}
+                person={i + (quantityForm === 'single' ? 1 : 4)}
+                wordPart={'vowel'}
                 handleComplete={handleCompleteBlock}
               />
             </div>

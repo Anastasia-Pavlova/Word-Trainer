@@ -15,7 +15,7 @@ export const FooterButtons = ({
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  function handleChangeStep(value, isCompleted) {
+  function handleChangeStep(value, isCompleted = false) {
     onChangeStep(value);
     dispatch(completeStep({ step: current, isCompleted }));
   }

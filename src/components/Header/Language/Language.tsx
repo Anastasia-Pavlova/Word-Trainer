@@ -1,19 +1,12 @@
 'use client';
 
 import { Radio } from 'antd';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export const Language = () => {
-  const { t, i18n } = useTranslation();
   const router = useRouter();
-  const [language, setLanguage] = useState();
-
-  useEffect(() => {
-    const lng = router.pathname.replace('/', '');
-    setLanguage(router.locale || 'en');
-  }, []);
+  const [language, setLanguage] = useState(router.locale || 'en');
 
   function handleChange(e) {
     router.push('/', '/', { locale: e.target.value });

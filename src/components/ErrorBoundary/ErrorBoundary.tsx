@@ -1,6 +1,17 @@
-import React, { Component } from "react";
+import { Component, ReactNode } from 'react';
 
-export class ErrorBoundary extends Component {
+interface ErrorBoundaryProps {
+  children: ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
+
+export class ErrorBoundary extends Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
@@ -15,7 +26,7 @@ export class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: 'center' }}>
           <h1>Something went wrong. Please try again later.</h1>
         </div>
       );
