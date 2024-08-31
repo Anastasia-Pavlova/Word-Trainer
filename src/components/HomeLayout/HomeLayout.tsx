@@ -47,7 +47,7 @@ export function HomeLayout() {
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     savedTheme && dispatch(changeAlgorithm(savedTheme));
-  }, []);
+  }, [dispatch]);
 
   const onStepChange = (value) => {
     setCurrent(value);

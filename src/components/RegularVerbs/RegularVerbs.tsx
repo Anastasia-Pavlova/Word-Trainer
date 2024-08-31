@@ -64,7 +64,7 @@ export const RegularVerbs = ({ currentStep }) => {
           </div>
           <Space direction="vertical">
             {word.examples?.map((v) => (
-              <Text>{v}</Text>
+              <Text key={v}>{v}</Text>
             ))}
           </Space>
         </Space>
